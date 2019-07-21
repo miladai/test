@@ -1,0 +1,406 @@
+{
+	"info": {
+		"_postman_id": "46457bbf-753b-4a7d-953d-8df5eb5cd8f1",
+		"name": "test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "test1",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "17d8f85f-dea9-4805-bea9-e7129d74940c",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "b346f539-ac51-42e2-9e48-b80714a8517d",
+						"exec": [
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Body contains token\", function () {",
+							"    var jsonData = pm.response.json();",
+							"      pm.response.to.have.jsonBody(\"access_token\"); ",
+							"});",
+							"",
+							"",
+							"pm.test(\"Body token type\", function () {",
+							"    var jsonData = pm.response.json();",
+							"        pm.expect(jsonData.token_type).to.eql(\"bearer\");",
+							"});",
+							"",
+							"var access_token = pm.response.json().access_token;",
+							"",
+							"var baccess_token =\"Bearer \"+pm.response.json().access_token;",
+							"",
+							"var global_token =\"777\";",
+							"pm.globals.set(\"global_token\", baccess_token);",
+							"",
+							"var glob = pm.variables.get(\"global_token\");",
+							"",
+							"",
+							"",
+							"console.log('access_token,',access_token);",
+							"",
+							"",
+							"console.log(\"global_token,\",glob);",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Basic ZGlnaWthbGEtY2xpZW50LWlkOmRpZ2lrYWxhLXNlY3JldC05MTAwNGFlZjc0ZmM0YThkYjVkYTlmNDRkNmQwOTEzOQ==",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "dk-ipg-test ",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "d1g1k@l@t3st",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://uat.mydigipay.com/digipay/api/oauth/token",
+					"protocol": "https",
+					"host": [
+						"uat",
+						"mydigipay",
+						"com"
+					],
+					"path": [
+						"digipay",
+						"api",
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "test1",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Basic ZGlnaWthbGEtY2xpZW50LWlkOmRpZ2lrYWxhLXNlY3JldC05MTAwNGFlZjc0ZmM0YThkYjVkYTlmNDRkNmQwOTEzOQ==",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "dk-ipg-test ",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "d1g1k@l@t3st",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://uat.mydigipay.com/digipay/api/oauth/token",
+							"protocol": "https",
+							"host": [
+								"uat",
+								"mydigipay",
+								"com"
+							],
+							"path": [
+								"digipay",
+								"api",
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 21 Jul 2019 06:58:35 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "4807"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-store"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"access_token\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsicmVzb3VyY2UiXSwidXNlcl9uYW1lIjoiZGlnaWthbGEtdXNlci1pZCIsInNjb3BlIjpbIlVTRVIiLCJXQUxMRVRfQlVTSU5FU1NfSU5URUdSQVRJT04iLCJCVVNJTkVTU19BUEkiXSwiZXhwIjoxNTYzNjk1OTE1LCJhdXRob3JpdGllcyI6WyJQRVJNSVNTSU9OX1JFQURfQUNDT1VOVF9CQUxBTkNFIiwiUk9MRV9QQVlNRU5UX0RQRyIsIlJPTEVfUEFZTUVOVF9JUEciLCJQRVJNSVNTSU9OX1JFQURfVVNFUl9QRVJNSVNTSU9OUyIsIlBFUk1JU1NJT05fUkVBRF9CVVNJTkVTU0VTIiwiUk9MRV9QQVlNRU5UX1dBTExFVCIsIlBFUk1JU1NJT05fUkVBRF9TVEFGRlMiLCJST0xFX1VTRVIiLCJQRVJNSVNTSU9OX1JFQURfQlVTSU5FU1NfU1RBRkZTIiwiUEVSTUlTU0lPTl9SRUFEX0JVU0lORVNTX1VTRVJfUk9MRVMiLCJQRVJNSVNTSU9OX1JFQURfQUNDT1VOVF9TVEFURU1FTlQiLCJQRVJNSVNTSU9OX1JFQURfU1RBRkZfUFJPRklMRSIsIlBFUk1JU1NJT05fUkVBRF9DTElFTlRTIiwiUEVSTUlTU0lPTl9SRUFEX1NFVFRMRU1FTlRTIiwiUEVSTUlTU0lPTl9SRUFEX1BFUk1JU1NJT05TIiwiUk9MRV9URVNUX1JVTEUiLCJQRVJNSVNTSU9OX0NSRUFURV9CVVNJTkVTU19TVEFGRlMiLCJQRVJNSVNTSU9OX1JFQURfUk9MRVMiLCJQRVJNSVNTSU9OX1VQU0VSVF9BTllfVVNFUl9ST0xFUyIsIlBFUk1JU1NJT05fTE9HSU5fSE9NRSIsIlJPTEVfTE9HSU5fSE9NRSIsIlBFUk1JU1NJT05fV0FMTEVUX0JBTEFOQ0UiLCJQRVJNSVNTSU9OX0NSRUFURV9CVVNJTkVTU0VTIiwiUEVSTUlTU0lPTl9SRUFEX0FDQ09VTlRTIiwiUk9MRV9CVVNJTkVTU19BUEkiLCJST0xFX1dBTExFVF9CVVNJTkVTU19JTlRFR1JBVElPTiIsIlBFUk1JU1NJT05fUEFZTUVOVF9EUEciLCJQRVJNSVNTSU9OX1JFQURfQlVTSU5FU1NfUFJPRklMRSIsIlBFUk1JU1NJT05fUkVBRF9VU0VSX1JPTEVTIiwiUEVSTUlTU0lPTl9VUFNFUlRfUk9MRSIsIlBFUk1JU1NJT05fU0RLX0lORk8iLCJQRVJNSVNTSU9OX1BBWU1FTlRfSVBHIiwiUEVSTUlTU0lPTl9VUERBVEVfU1RBRkZfU1RBVFVTIiwiUEVSTUlTU0lPTl9VUFNFUlRfQlVTSU5FU1NfVVNFUl9ST0xFUyIsIlBFUk1JU1NJT05fUkVBRF9BTllfVVNFUl9ST0xFUyIsIlBFUk1JU1NJT05fQ1JFQVRFX1NUQUZGUyIsIlBFUk1JU1NJT05fUkVBRF9BQ1RJVklUSUVTIiwiUEVSTUlTU0lPTl9VUERBVEVfQlVTSU5FU1NfU1RBRkZfU1RBVFVTIiwiUEVSTUlTU0lPTl9SRUFEX0RFVEFJTEVEX0FDVElWSVRJRVMiLCJST0xFX1RFU1RfT05FIiwiUk9MRV9TREtfSU5GTyIsIlBFUk1JU1NJT05fUEFZTUVOVF9XQUxMRVQiLCJQRVJNSVNTSU9OX1BBWV9PRkZMSU5FIl0sImp0aSI6IjllMDAzZjI5LTcxYmMtNGZmNS05YjRjLTk5MTBmYTY4ODQxMCIsImNsaWVudF9pZCI6ImRpZ2lrYWxhLWNsaWVudC1pZCJ9.hHbEztMFWJctFnFAlLnEN4Nx0FtvAJOOOqhORMJXoB0gI6Fw0YNSh6XDAmvTsJwTmEVyBu68l07rZBtdiKgqCKCAQCJvBDAVsMilLxCD5j_SbpSH6fYpzmbKi-UB3mLA-AQRcUDogCsncWf8QV0-lOS8x_HdpIrEHzgadVjMiEgW-kUUkvPj6ms-kbLeyddIhgxZxYlKw3XUa5r4RLT0XQ3z8WtLkez5jUMgGfZ5S3nKcucoXTzvBNDSTSmab8qXLgrJyNZ-WtOsdcDuIje5avP4KtoGdpsxY0nj_X5FgkPBqO8oweO6z2k_gkf7AWu1vn-naQaSqCO4-NVpbVkN1Q\",\n    \"token_type\": \"bearer\",\n    \"refresh_token\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsicmVzb3VyY2UiXSwidXNlcl9uYW1lIjoiZGlnaWthbGEtdXNlci1pZCIsInNjb3BlIjpbIlVTRVIiLCJXQUxMRVRfQlVTSU5FU1NfSU5URUdSQVRJT04iLCJCVVNJTkVTU19BUEkiXSwiYXRpIjoiOWUwMDNmMjktNzFiYy00ZmY1LTliNGMtOTkxMGZhNjg4NDEwIiwiZXhwIjoxNTY2Mjg0MzE1LCJhdXRob3JpdGllcyI6WyJQRVJNSVNTSU9OX1JFQURfQUNDT1VOVF9CQUxBTkNFIiwiUk9MRV9QQVlNRU5UX0RQRyIsIlJPTEVfUEFZTUVOVF9JUEciLCJQRVJNSVNTSU9OX1JFQURfVVNFUl9QRVJNSVNTSU9OUyIsIlBFUk1JU1NJT05fUkVBRF9CVVNJTkVTU0VTIiwiUk9MRV9QQVlNRU5UX1dBTExFVCIsIlBFUk1JU1NJT05fUkVBRF9TVEFGRlMiLCJST0xFX1VTRVIiLCJQRVJNSVNTSU9OX1JFQURfQlVTSU5FU1NfU1RBRkZTIiwiUEVSTUlTU0lPTl9SRUFEX0JVU0lORVNTX1VTRVJfUk9MRVMiLCJQRVJNSVNTSU9OX1JFQURfQUNDT1VOVF9TVEFURU1FTlQiLCJQRVJNSVNTSU9OX1JFQURfU1RBRkZfUFJPRklMRSIsIlBFUk1JU1NJT05fUkVBRF9DTElFTlRTIiwiUEVSTUlTU0lPTl9SRUFEX1NFVFRMRU1FTlRTIiwiUEVSTUlTU0lPTl9SRUFEX1BFUk1JU1NJT05TIiwiUk9MRV9URVNUX1JVTEUiLCJQRVJNSVNTSU9OX0NSRUFURV9CVVNJTkVTU19TVEFGRlMiLCJQRVJNSVNTSU9OX1JFQURfUk9MRVMiLCJQRVJNSVNTSU9OX1VQU0VSVF9BTllfVVNFUl9ST0xFUyIsIlBFUk1JU1NJT05fTE9HSU5fSE9NRSIsIlJPTEVfTE9HSU5fSE9NRSIsIlBFUk1JU1NJT05fV0FMTEVUX0JBTEFOQ0UiLCJQRVJNSVNTSU9OX0NSRUFURV9CVVNJTkVTU0VTIiwiUEVSTUlTU0lPTl9SRUFEX0FDQ09VTlRTIiwiUk9MRV9CVVNJTkVTU19BUEkiLCJST0xFX1dBTExFVF9CVVNJTkVTU19JTlRFR1JBVElPTiIsIlBFUk1JU1NJT05fUEFZTUVOVF9EUEciLCJQRVJNSVNTSU9OX1JFQURfQlVTSU5FU1NfUFJPRklMRSIsIlBFUk1JU1NJT05fUkVBRF9VU0VSX1JPTEVTIiwiUEVSTUlTU0lPTl9VUFNFUlRfUk9MRSIsIlBFUk1JU1NJT05fU0RLX0lORk8iLCJQRVJNSVNTSU9OX1BBWU1FTlRfSVBHIiwiUEVSTUlTU0lPTl9VUERBVEVfU1RBRkZfU1RBVFVTIiwiUEVSTUlTU0lPTl9VUFNFUlRfQlVTSU5FU1NfVVNFUl9ST0xFUyIsIlBFUk1JU1NJT05fUkVBRF9BTllfVVNFUl9ST0xFUyIsIlBFUk1JU1NJT05fQ1JFQVRFX1NUQUZGUyIsIlBFUk1JU1NJT05fUkVBRF9BQ1RJVklUSUVTIiwiUEVSTUlTU0lPTl9VUERBVEVfQlVTSU5FU1NfU1RBRkZfU1RBVFVTIiwiUEVSTUlTU0lPTl9SRUFEX0RFVEFJTEVEX0FDVElWSVRJRVMiLCJST0xFX1RFU1RfT05FIiwiUk9MRV9TREtfSU5GTyIsIlBFUk1JU1NJT05fUEFZTUVOVF9XQUxMRVQiLCJQRVJNSVNTSU9OX1BBWV9PRkZMSU5FIl0sImp0aSI6IjgyNWEwZGFiLWY5MjktNDc3OC1hYTljLTVjM2JhNGQ0OTM1OCIsImNsaWVudF9pZCI6ImRpZ2lrYWxhLWNsaWVudC1pZCJ9.mbDJtw6YK9P4MeteL40MRqOkA0ZJZzbetLaGWBt9uRW-Xip_ylvGkSIg4OUgMO9ce0co3y7PuiuOqiC_DNMhwaAEOuxH2gWiXY6XhRcxrnmoKO5oMWuMaGPQPfTtkGHGZ40qlHxP_n_Hyam1cHSRsSjOd9o6kmm-IpDFOGKUoK1y8N8Cz1TNAWfngD1qLqEYe-R-qStN6zBCXFM0BRrbKefowgc7qiValJWkvwAKTxJi1wx5ZcVab2g7_ZYdxkg2ejjb0X9p0-Cbo5s1nv3EAqwEE3xaCsZgxNKD0VIYeEv9GJ3ZOoxmM36ircnw_OamVsfQMl2IrOw5GVvyW5y-dw\",\n    \"expires_in\": 3599,\n    \"scope\": \"USER WALLET_BUSINESS_INTEGRATION BUSINESS_API\",\n    \"jti\": \"9e003f29-71bc-4ff5-9b4c-9910fa688410\"\n}"
+				}
+			]
+		},
+		{
+			"name": "test2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "24e8d43e-1be4-4f65-b1a5-0df5a0fe7c65",
+						"exec": [
+							"",
+							"",
+							"var glob = pm.variables.get(\"global_token\");",
+							"",
+							"console.log('global_token,',pm.variables.get(\"global\"));",
+							"console.log('glob,',glob);",
+							"",
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "authorization",
+						"type": "text",
+						"value": "{{global}}"
+					},
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsicmVzb3VyY2UiXSwidXNlcl9uYW1lIjoiZGlnaWthbGEtdXNlci1pZCIsInNjb3BlIjpbIlVTRVIiLCJXQUxMRVRfQlVTSU5FU1NfSU5URUdSQVRJT04iLCJCVVNJTkVTU19BUEkiXSwiZXhwIjoxNTYzNjk5MzY1LCJhdXRob3JpdGllcyI6WyJQRVJNSVNTSU9OX1JFQURfQUNDT1VOVF9CQUxBTkNFIiwiUk9MRV9QQVlNRU5UX0RQRyIsIlJPTEVfUEFZTUVOVF9JUEciLCJQRVJNSVNTSU9OX1JFQURfVVNFUl9QRVJNSVNTSU9OUyIsIlBFUk1JU1NJT05fUkVBRF9CVVNJTkVTU0VTIiwiUk9MRV9QQVlNRU5UX1dBTExFVCIsIlBFUk1JU1NJT05fUkVBRF9TVEFGRlMiLCJST0xFX1VTRVIiLCJQRVJNSVNTSU9OX1JFQURfQlVTSU5FU1NfU1RBRkZTIiwiUEVSTUlTU0lPTl9SRUFEX0JVU0lORVNTX1VTRVJfUk9MRVMiLCJQRVJNSVNTSU9OX1JFQURfQUNDT1VOVF9TVEFURU1FTlQiLCJQRVJNSVNTSU9OX1JFQURfU1RBRkZfUFJPRklMRSIsIlBFUk1JU1NJT05fUkVBRF9DTElFTlRTIiwiUEVSTUlTU0lPTl9SRUFEX1NFVFRMRU1FTlRTIiwiUEVSTUlTU0lPTl9SRUFEX1BFUk1JU1NJT05TIiwiUk9MRV9URVNUX1JVTEUiLCJQRVJNSVNTSU9OX0NSRUFURV9CVVNJTkVTU19TVEFGRlMiLCJQRVJNSVNTSU9OX1JFQURfUk9MRVMiLCJQRVJNSVNTSU9OX1VQU0VSVF9BTllfVVNFUl9ST0xFUyIsIlBFUk1JU1NJT05fTE9HSU5fSE9NRSIsIlJPTEVfTE9HSU5fSE9NRSIsIlBFUk1JU1NJT05fV0FMTEVUX0JBTEFOQ0UiLCJQRVJNSVNTSU9OX0NSRUFURV9CVVNJTkVTU0VTIiwiUEVSTUlTU0lPTl9SRUFEX0FDQ09VTlRTIiwiUk9MRV9CVVNJTkVTU19BUEkiLCJST0xFX1dBTExFVF9CVVNJTkVTU19JTlRFR1JBVElPTiIsIlBFUk1JU1NJT05fUEFZTUVOVF9EUEciLCJQRVJNSVNTSU9OX1JFQURfQlVTSU5FU1NfUFJPRklMRSIsIlBFUk1JU1NJT05fUkVBRF9VU0VSX1JPTEVTIiwiUEVSTUlTU0lPTl9VUFNFUlRfUk9MRSIsIlBFUk1JU1NJT05fU0RLX0lORk8iLCJQRVJNSVNTSU9OX1BBWU1FTlRfSVBHIiwiUEVSTUlTU0lPTl9VUERBVEVfU1RBRkZfU1RBVFVTIiwiUEVSTUlTU0lPTl9VUFNFUlRfQlVTSU5FU1NfVVNFUl9ST0xFUyIsIlBFUk1JU1NJT05fUkVBRF9BTllfVVNFUl9ST0xFUyIsIlBFUk1JU1NJT05fQ1JFQVRFX1NUQUZGUyIsIlBFUk1JU1NJT05fUkVBRF9BQ1RJVklUSUVTIiwiUEVSTUlTU0lPTl9VUERBVEVfQlVTSU5FU1NfU1RBRkZfU1RBVFVTIiwiUEVSTUlTU0lPTl9SRUFEX0RFVEFJTEVEX0FDVElWSVRJRVMiLCJST0xFX1RFU1RfT05FIiwiUk9MRV9TREtfSU5GTyIsIlBFUk1JU1NJT05fUEFZTUVOVF9XQUxMRVQiLCJQRVJNSVNTSU9OX1BBWV9PRkZMSU5FIl0sImp0aSI6IjE3YjY1OTdjLTlhZTgtNGQyNS1iYTEyLTBjNjljNzg2YjY2MyIsImNsaWVudF9pZCI6ImRpZ2lrYWxhLWNsaWVudC1pZCJ9.hUZqpjN222HZf6vjnQBGjyNrG1dyAb-67phnh-OqfbbVUHLtgJLlxk26QoCMmJbZv0SCtL5Lcmd4VR8mJxg26IY7HlneUlMXoZ03DfMWgE_hS47Fmx98pwgmytxkSpYmc3h5e00M4DM2ooPCZkYQiQhY0Ns61YZtRvn-Y1vBi1vs6TZvLuxvOQhZVS-2f4j1BLttDVdd3RnU_A1PpnLAC6Uaz40oqC6yBmm7BdIGY1MwDqyA54RQPdQbr-oaQ3NbghwcOYd8wM-O7IUSzHP10egW9oBnazj0Owq8XfbU9bS8zjTiGz1UR17DBySwpgLf3ne_VAyb7Tk84XtfuC71GQ",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"orderId\" : \"12345\",\n  \"basketId\" : \"123\",\n  \"name\" : \"name\",\n  \"amount\" : 1000,\n  \"pan\" : \"1234567812345678\",\n  \"providerId\" : \"45eac7ed-e0bc-4856-b2d4-8262e15628b8\",\n  \"refNumber\" : \"12345667\",\n  \"purchaseTrackingCode\" : \"purchase-tracking-code\",\n  \"paymentChannelType\" : 0\n}"
+				},
+				"url": {
+					"raw": "https://uat.mydigipay.com/digipay/api/payout/refunds",
+					"protocol": "https",
+					"host": [
+						"uat",
+						"mydigipay",
+						"com"
+					],
+					"path": [
+						"digipay",
+						"api",
+						"payout",
+						"refunds"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "test1",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Basic ZGlnaWthbGEtY2xpZW50LWlkOmRpZ2lrYWxhLXNlY3JldC05MTAwNGFlZjc0ZmM0YThkYjVkYTlmNDRkNmQwOTEzOQ==",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "dk-ipg-test ",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "d1g1k@l@t3st",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://uat.mydigipay.com/digipay/api/oauth/token",
+							"protocol": "https",
+							"host": [
+								"uat",
+								"mydigipay",
+								"com"
+							],
+							"path": [
+								"digipay",
+								"api",
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 21 Jul 2019 06:58:35 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "4807"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-store"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"access_token\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsicmVzb3VyY2UiXSwidXNlcl9uYW1lIjoiZGlnaWthbGEtdXNlci1pZCIsInNjb3BlIjpbIlVTRVIiLCJXQUxMRVRfQlVTSU5FU1NfSU5URUdSQVRJT04iLCJCVVNJTkVTU19BUEkiXSwiZXhwIjoxNTYzNjk1OTE1LCJhdXRob3JpdGllcyI6WyJQRVJNSVNTSU9OX1JFQURfQUNDT1VOVF9CQUxBTkNFIiwiUk9MRV9QQVlNRU5UX0RQRyIsIlJPTEVfUEFZTUVOVF9JUEciLCJQRVJNSVNTSU9OX1JFQURfVVNFUl9QRVJNSVNTSU9OUyIsIlBFUk1JU1NJT05fUkVBRF9CVVNJTkVTU0VTIiwiUk9MRV9QQVlNRU5UX1dBTExFVCIsIlBFUk1JU1NJT05fUkVBRF9TVEFGRlMiLCJST0xFX1VTRVIiLCJQRVJNSVNTSU9OX1JFQURfQlVTSU5FU1NfU1RBRkZTIiwiUEVSTUlTU0lPTl9SRUFEX0JVU0lORVNTX1VTRVJfUk9MRVMiLCJQRVJNSVNTSU9OX1JFQURfQUNDT1VOVF9TVEFURU1FTlQiLCJQRVJNSVNTSU9OX1JFQURfU1RBRkZfUFJPRklMRSIsIlBFUk1JU1NJT05fUkVBRF9DTElFTlRTIiwiUEVSTUlTU0lPTl9SRUFEX1NFVFRMRU1FTlRTIiwiUEVSTUlTU0lPTl9SRUFEX1BFUk1JU1NJT05TIiwiUk9MRV9URVNUX1JVTEUiLCJQRVJNSVNTSU9OX0NSRUFURV9CVVNJTkVTU19TVEFGRlMiLCJQRVJNSVNTSU9OX1JFQURfUk9MRVMiLCJQRVJNSVNTSU9OX1VQU0VSVF9BTllfVVNFUl9ST0xFUyIsIlBFUk1JU1NJT05fTE9HSU5fSE9NRSIsIlJPTEVfTE9HSU5fSE9NRSIsIlBFUk1JU1NJT05fV0FMTEVUX0JBTEFOQ0UiLCJQRVJNSVNTSU9OX0NSRUFURV9CVVNJTkVTU0VTIiwiUEVSTUlTU0lPTl9SRUFEX0FDQ09VTlRTIiwiUk9MRV9CVVNJTkVTU19BUEkiLCJST0xFX1dBTExFVF9CVVNJTkVTU19JTlRFR1JBVElPTiIsIlBFUk1JU1NJT05fUEFZTUVOVF9EUEciLCJQRVJNSVNTSU9OX1JFQURfQlVTSU5FU1NfUFJPRklMRSIsIlBFUk1JU1NJT05fUkVBRF9VU0VSX1JPTEVTIiwiUEVSTUlTU0lPTl9VUFNFUlRfUk9MRSIsIlBFUk1JU1NJT05fU0RLX0lORk8iLCJQRVJNSVNTSU9OX1BBWU1FTlRfSVBHIiwiUEVSTUlTU0lPTl9VUERBVEVfU1RBRkZfU1RBVFVTIiwiUEVSTUlTU0lPTl9VUFNFUlRfQlVTSU5FU1NfVVNFUl9ST0xFUyIsIlBFUk1JU1NJT05fUkVBRF9BTllfVVNFUl9ST0xFUyIsIlBFUk1JU1NJT05fQ1JFQVRFX1NUQUZGUyIsIlBFUk1JU1NJT05fUkVBRF9BQ1RJVklUSUVTIiwiUEVSTUlTU0lPTl9VUERBVEVfQlVTSU5FU1NfU1RBRkZfU1RBVFVTIiwiUEVSTUlTU0lPTl9SRUFEX0RFVEFJTEVEX0FDVElWSVRJRVMiLCJST0xFX1RFU1RfT05FIiwiUk9MRV9TREtfSU5GTyIsIlBFUk1JU1NJT05fUEFZTUVOVF9XQUxMRVQiLCJQRVJNSVNTSU9OX1BBWV9PRkZMSU5FIl0sImp0aSI6IjllMDAzZjI5LTcxYmMtNGZmNS05YjRjLTk5MTBmYTY4ODQxMCIsImNsaWVudF9pZCI6ImRpZ2lrYWxhLWNsaWVudC1pZCJ9.hHbEztMFWJctFnFAlLnEN4Nx0FtvAJOOOqhORMJXoB0gI6Fw0YNSh6XDAmvTsJwTmEVyBu68l07rZBtdiKgqCKCAQCJvBDAVsMilLxCD5j_SbpSH6fYpzmbKi-UB3mLA-AQRcUDogCsncWf8QV0-lOS8x_HdpIrEHzgadVjMiEgW-kUUkvPj6ms-kbLeyddIhgxZxYlKw3XUa5r4RLT0XQ3z8WtLkez5jUMgGfZ5S3nKcucoXTzvBNDSTSmab8qXLgrJyNZ-WtOsdcDuIje5avP4KtoGdpsxY0nj_X5FgkPBqO8oweO6z2k_gkf7AWu1vn-naQaSqCO4-NVpbVkN1Q\",\n    \"token_type\": \"bearer\",\n    \"refresh_token\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsicmVzb3VyY2UiXSwidXNlcl9uYW1lIjoiZGlnaWthbGEtdXNlci1pZCIsInNjb3BlIjpbIlVTRVIiLCJXQUxMRVRfQlVTSU5FU1NfSU5URUdSQVRJT04iLCJCVVNJTkVTU19BUEkiXSwiYXRpIjoiOWUwMDNmMjktNzFiYy00ZmY1LTliNGMtOTkxMGZhNjg4NDEwIiwiZXhwIjoxNTY2Mjg0MzE1LCJhdXRob3JpdGllcyI6WyJQRVJNSVNTSU9OX1JFQURfQUNDT1VOVF9CQUxBTkNFIiwiUk9MRV9QQVlNRU5UX0RQRyIsIlJPTEVfUEFZTUVOVF9JUEciLCJQRVJNSVNTSU9OX1JFQURfVVNFUl9QRVJNSVNTSU9OUyIsIlBFUk1JU1NJT05fUkVBRF9CVVNJTkVTU0VTIiwiUk9MRV9QQVlNRU5UX1dBTExFVCIsIlBFUk1JU1NJT05fUkVBRF9TVEFGRlMiLCJST0xFX1VTRVIiLCJQRVJNSVNTSU9OX1JFQURfQlVTSU5FU1NfU1RBRkZTIiwiUEVSTUlTU0lPTl9SRUFEX0JVU0lORVNTX1VTRVJfUk9MRVMiLCJQRVJNSVNTSU9OX1JFQURfQUNDT1VOVF9TVEFURU1FTlQiLCJQRVJNSVNTSU9OX1JFQURfU1RBRkZfUFJPRklMRSIsIlBFUk1JU1NJT05fUkVBRF9DTElFTlRTIiwiUEVSTUlTU0lPTl9SRUFEX1NFVFRMRU1FTlRTIiwiUEVSTUlTU0lPTl9SRUFEX1BFUk1JU1NJT05TIiwiUk9MRV9URVNUX1JVTEUiLCJQRVJNSVNTSU9OX0NSRUFURV9CVVNJTkVTU19TVEFGRlMiLCJQRVJNSVNTSU9OX1JFQURfUk9MRVMiLCJQRVJNSVNTSU9OX1VQU0VSVF9BTllfVVNFUl9ST0xFUyIsIlBFUk1JU1NJT05fTE9HSU5fSE9NRSIsIlJPTEVfTE9HSU5fSE9NRSIsIlBFUk1JU1NJT05fV0FMTEVUX0JBTEFOQ0UiLCJQRVJNSVNTSU9OX0NSRUFURV9CVVNJTkVTU0VTIiwiUEVSTUlTU0lPTl9SRUFEX0FDQ09VTlRTIiwiUk9MRV9CVVNJTkVTU19BUEkiLCJST0xFX1dBTExFVF9CVVNJTkVTU19JTlRFR1JBVElPTiIsIlBFUk1JU1NJT05fUEFZTUVOVF9EUEciLCJQRVJNSVNTSU9OX1JFQURfQlVTSU5FU1NfUFJPRklMRSIsIlBFUk1JU1NJT05fUkVBRF9VU0VSX1JPTEVTIiwiUEVSTUlTU0lPTl9VUFNFUlRfUk9MRSIsIlBFUk1JU1NJT05fU0RLX0lORk8iLCJQRVJNSVNTSU9OX1BBWU1FTlRfSVBHIiwiUEVSTUlTU0lPTl9VUERBVEVfU1RBRkZfU1RBVFVTIiwiUEVSTUlTU0lPTl9VUFNFUlRfQlVTSU5FU1NfVVNFUl9ST0xFUyIsIlBFUk1JU1NJT05fUkVBRF9BTllfVVNFUl9ST0xFUyIsIlBFUk1JU1NJT05fQ1JFQVRFX1NUQUZGUyIsIlBFUk1JU1NJT05fUkVBRF9BQ1RJVklUSUVTIiwiUEVSTUlTU0lPTl9VUERBVEVfQlVTSU5FU1NfU1RBRkZfU1RBVFVTIiwiUEVSTUlTU0lPTl9SRUFEX0RFVEFJTEVEX0FDVElWSVRJRVMiLCJST0xFX1RFU1RfT05FIiwiUk9MRV9TREtfSU5GTyIsIlBFUk1JU1NJT05fUEFZTUVOVF9XQUxMRVQiLCJQRVJNSVNTSU9OX1BBWV9PRkZMSU5FIl0sImp0aSI6IjgyNWEwZGFiLWY5MjktNDc3OC1hYTljLTVjM2JhNGQ0OTM1OCIsImNsaWVudF9pZCI6ImRpZ2lrYWxhLWNsaWVudC1pZCJ9.mbDJtw6YK9P4MeteL40MRqOkA0ZJZzbetLaGWBt9uRW-Xip_ylvGkSIg4OUgMO9ce0co3y7PuiuOqiC_DNMhwaAEOuxH2gWiXY6XhRcxrnmoKO5oMWuMaGPQPfTtkGHGZ40qlHxP_n_Hyam1cHSRsSjOd9o6kmm-IpDFOGKUoK1y8N8Cz1TNAWfngD1qLqEYe-R-qStN6zBCXFM0BRrbKefowgc7qiValJWkvwAKTxJi1wx5ZcVab2g7_ZYdxkg2ejjb0X9p0-Cbo5s1nv3EAqwEE3xaCsZgxNKD0VIYeEv9GJ3ZOoxmM36ircnw_OamVsfQMl2IrOw5GVvyW5y-dw\",\n    \"expires_in\": 3599,\n    \"scope\": \"USER WALLET_BUSINESS_INTEGRATION BUSINESS_API\",\n    \"jti\": \"9e003f29-71bc-4ff5-9b4c-9910fa688410\"\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "edc8c52a-6357-4230-b1de-f234c369099b",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "53586bd1-5ae0-4002-8181-9cfe4c6c3e09",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "79369094-2dcf-4dab-8259-b14bf83d1dd7",
+			"key": "token",
+			"value": "aaa",
+			"type": "string"
+		}
+	]
+}
