@@ -5,10 +5,10 @@ ARG NODE_VERSION=10
 ARG NEWMAN_VERSION
 
 # Bail out early if NODE_VERSION is not provided
-RUN if [ ! $(echo $NEWMAN_VERSION | grep -oE "^[0-9]+\.[0-9]+\.[0-9]+$") ]; then \
-        echo "\033[0;31mA valid semver Newman version is required in the NEWMAN_VERSION build-arg\033[0m"; \
-        exit 1; \
-    fi
+#RUN if [ ! $(echo $NEWMAN_VERSION | grep -oE "^[0-9]+\.[0-9]+\.[0-9]+$") ]; then \
+#        echo "\033[0;31mA valid semver Newman version is required in the NEWMAN_VERSION build-arg\033[0m"; \
+#        exit 1; \
+#    fi
 
 # Install node
 ADD https://deb.nodesource.com/setup_$NODE_VERSION.x /opt/install_node.sh
