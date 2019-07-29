@@ -1,23 +1,26 @@
-FROM ubuntu:14.04.2
+FROM ubuntu:18.04
 LABEL maintainer="Postman Labs <help@getpostman.com>"
 
 ARG NODE_VERSION=10
-#ARG NEWMAN_VERSION
+ARG NEWMAN_VERSION=4.5.1
 
 # Bail out early if NODE_VERSION is not provided
-#RUN if [ ! $(echo $NEWMAN_VERSION | grep -oE "^[0-9]+\.[0-9]+\.[0-9]+$") ]; then \
-#        echo "\033[0;31mA valid semver Newman version is required in the NEWMAN_VERSION build-arg\033[0m"; \
-#        exit 1; \
-#    fi
+RUN if [ ! $(echo $NEWMAN_VERSION | grep -oE "^[0-9]+\.[0-9]+\.[0-9]+$") ]; then \
+        echo "\033[0;31mA valid semver Newman version is required in the NEWMAN_VERSION build-arg\033[0m"; \
+        exit 1; \
+    fi
 
 # Install node
-#ADD https://deb.nodesource.com/setup_$NODE_VERSION.x /opt/install_node.sh
+ADD https://deb.nodesource.com/setup_$NODE_VERSION.x /opt/install_node.sh
 
-RUN bash /opt/install_node.sh && \
+RUN apt-get update -y && \
+    apt-get upgrade -y && \
+    apt-get install -y gnupg && \
+    bash /opt/install_node.sh && \
     apt-get install -y nodejs && \
-#    npm install -g newman@${NEWMAN_VERSION} && \
-    npm install -g newman && \
-#    rm /opt/install_node.sh;
+    npm install -g newman@${NEWMAN_VERSION} && \
+    rm /opt/install_node.sh && \
+    apt-get purge -y gnupg;
 
 # Set environment variables
 ENV LC_ALL="en_US.UTF-8" LANG="en_US.UTF-8" LANGUAGE="en_US.UTF-8"
@@ -30,12 +33,12 @@ ENV LC_ALL="en_US.UTF-8" LANG="en_US.UTF-8" LANGUAGE="en_US.UTF-8"
 # In case you mount your collections directory to a different location, you will need to give absolute paths to any
 # collection, environment files you want to pass to newman, and if you want newman reports to be saved to your disk.
 # Or you can change the workdir by using the -w or --workdir flag
-#WORKDIR /etc/newman
+WORKDIR /etc/newman
 
 # Set newman as the default container command
 # Now you can run the container via
 #
-# docker run -v /home/collections:/etc/newman -t postman/newman_ubuntu1404 -c YourCollection.json.postman_collection \
+# docker run -v /home/collections:/etc/newman -t postman/newman_ubuntu -c YourCollection.json.postman_collection \
 #                                                                          -e YourEnvironment.postman_environment \
 #                                                                          -H newman_report.html
 ENTRYPOINT ["newman"]
