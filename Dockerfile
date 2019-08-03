@@ -23,8 +23,8 @@ RUN apt-get update -y && \
     apt-get purge -y gnupg;
 
 # Install newman reporter
-RUN npm install newman-reporter-teamcity   
-    npm install -g newman-reporter-htmlextra
+RUN npm install newman-reporter-teamcity\   
+    npm install -g newman-reporter-htmlextra;
 
 # Set environment variables
 ENV LC_ALL="en_US.UTF-8" LANG="en_US.UTF-8" LANGUAGE="en_US.UTF-8"
